@@ -68,20 +68,10 @@ export class Kaku extends Module {
         );
     }
 
-
-    //powerControl(finishCallback: ()=>void, enabled : boolean) {
-    //    //do module shit
-    //    console.log('Powercontrol ran with enabled var being ', enabled);
-    //    setTimeout(function() {
-    //        finishCallback();
-    //    }, 5000);
-    //    //finishCallback();
-    //    //connector433.enable();
-    //}
-
-
-
-    enableLight(address:string, unit:string){
+    enableLight(args){
+        console.log(args);
+        var address = args.address;
+        var unit = args.unit;
         console.log(`Module call enable light`, address, unit);
 
         this.connector.enableKaku(address, unit, function(){console.log('Muh callback')});
