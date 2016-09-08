@@ -1,7 +1,7 @@
 import * as PiStation from "../../node_modules/pistation-definitions/PiStation.ts";
 import {Connector433} from "../../connectors/connector-433/connector433.connector";
-import {Observable} from 'rxjs/Rx';
 import {Module} from "../../app/module";
+import {Observable} from 'rxjs/Rx';
 
 export class Kaku extends Module {
     static moduleId:string;
@@ -73,8 +73,16 @@ export class Kaku extends Module {
         var address = args.address;
         var unit = args.unit;
         console.log(`Module call enable light`, address, unit);
+        var enableKaku = Observable.bindCallback(this.connector.enableKaku);
+        var lightEnabled = enableKaku(address, unit);
 
-        this.connector.enableKaku(address, unit, function(){console.log('Muh callback')});
+        lightEnabled.subscribe((event) => {
+            console.log('light enableddddd');
+        })
+
+        return lightEnabled.map((event=> {
+            return {value: 'Light Enabled! '}
+        }))
 
         /*
         const dummyFunctionUpdates = Observable //dummy update stream from connector
