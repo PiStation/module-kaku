@@ -73,24 +73,15 @@ export class Kaku extends Module {
         var address = args.address;
         var unit = args.unit;
         console.log(`Module call enable light`, address, unit);
-        var enableKaku = Observable.bindCallback(this.connector.enableKaku);
-        var lightEnabled = enableKaku(address, unit);
+        var lightEnabled = this.connector.enableKaku(address, unit);
 
-        lightEnabled.subscribe((event) => {
-            console.log('light enableddddd');
-        })
+        lightEnabled.subscribe(
+            (e)=>console.log('Now with observable update stream when message is send queue and update data from exec callback', e),
+            (e)=>{console.log('erroorrrrrrrr', e)},
+            () => console.log('kaku message command completed!'));
 
         return lightEnabled.map((event=> {
             return {value: 'Light Enabled! '}
-        }))
-
-        /*
-        const dummyFunctionUpdates = Observable //dummy update stream from connector
-            .interval(500)
-            .timeInterval()
-            .take(3);
-
-        return dummyFunctionUpdates;
-        */
+        }));
     }
 }
