@@ -97,7 +97,7 @@ export class Kaku extends Module {
         var address = args.address;
         var unit = args.unit;
         var dim = args.dim;
-        var switchDimmed = this.connector.dimKaku(address, unit, dim);
+        var switchDimmed = this.connector.dimKaku(address, unit, +dim);
 
         return switchDimmed.map((event=> {
             return {value: 'KaKu dimmed! '}
