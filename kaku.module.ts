@@ -68,20 +68,39 @@ export class Kaku extends Module {
         );
     }
 
-    enableLight(args){
-        console.log(args);
+    enableKakuSwitch(args){
         var address = args.address;
         var unit = args.unit;
-        console.log(`Module call enable light`, address, unit);
-        var lightEnabled = this.connector.enableKaku(address, unit);
+        var switchEnabled = this.connector.enableKaku(address, unit);
 
-        lightEnabled.subscribe(
+        switchEnabled.subscribe(
             (e)=>console.log('Now with observable update stream when message is send queue and update data from exec callback', e),
             (e)=>{console.log('erroorrrrrrrr', e)},
             () => console.log('kaku message command completed!'));
 
-        return lightEnabled.map((event=> {
-            return {value: 'Light Enabled! '}
+        return switchEnabled.map((event=> {
+            return {value: 'KaKu switch enabled! '}
+        }));
+    }
+
+    disableKakuSwitch(args){
+        var address = args.address;
+        var unit = args.unit;
+        var switchDisabled = this.connector.disableKaku(address, unit);
+
+        return switchDisabled.map((event=> {
+            return {value: 'KaKu switch disabled! '}
+        }));
+    }
+
+    dimKaku(args){
+        var address = args.address;
+        var unit = args.unit;
+        var dim = args.dim;
+        var switchDimmed = this.connector.dimKaku(address, unit, dim);
+
+        return switchDimmed.map((event=> {
+            return {value: 'KaKu dimmed! '}
         }));
     }
 }
