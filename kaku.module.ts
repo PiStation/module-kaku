@@ -14,7 +14,7 @@ export class Kaku extends Module {
         this.connector = app.getConnector('connector-433');
 
         this.addFunction(
-            new PiStation.Function('enableLight', [
+            new PiStation.Function('enableKakuSwitch', [
                 new PiStation.ArgumentTextbox({
                     key:'address',
                     label:'address',
@@ -31,7 +31,7 @@ export class Kaku extends Module {
         );
 
         this.addFunction(
-            new PiStation.Function('disableLight', [
+            new PiStation.Function('disableKakuSwitch', [
                 new PiStation.ArgumentTextbox({
                     key:'address',
                     label:'address',
@@ -48,7 +48,7 @@ export class Kaku extends Module {
         );
 
         this.addFunction(
-            new PiStation.Function('dimLight', [
+            new PiStation.Function('dimKaku', [
                 new PiStation.ArgumentTextbox({
                     key:'address',
                     label:'address',
