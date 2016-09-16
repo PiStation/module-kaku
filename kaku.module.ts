@@ -88,6 +88,11 @@ export class Kaku extends Module {
         var unit = args.unit;
         var switchDisabled = this.connector.disableKaku(address, unit);
 
+        switchDisabled.subscribe(
+            (e)=>console.log('Now with observable update stream when message is send queue and update data from exec callback', e),
+            (e)=>{console.log('erroorrrrrrrr', e)},
+            () => console.log('kaku message command completed!'));
+
         return switchDisabled.map((event=> {
             return {value: 'KaKu switch disabled! '}
         }));
@@ -98,6 +103,11 @@ export class Kaku extends Module {
         var unit = args.unit;
         var dim = args.dim;
         var switchDimmed = this.connector.dimKaku(address, unit, +dim);
+
+        switchDimmed.subscribe(
+            (e)=>console.log('Now with observable update stream when message is send queue and update data from exec callback', e),
+            (e)=>{console.log('erroorrrrrrrr', e)},
+            () => console.log('kaku message command completed!'));
 
         return switchDimmed.map((event=> {
             return {value: 'KaKu dimmed! '}
